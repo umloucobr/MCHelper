@@ -19,6 +19,7 @@ namespace MCHelper {
 
             if (file.is_open()) {
                 file >> jsonData;
+                MCLauncher_path = jsonData["config"]["MCLauncherPath"];
                 folderWasGenerated = jsonData["config"]["folderWasGenerated"];
             }
             else {
@@ -27,9 +28,17 @@ namespace MCHelper {
         }
         catch (const std::exception& e) {
             std::cerr << "Failed to open the file.\n";
-            std::cout << e.what();
+            std::cerr << e.what();
             std::exit(EXIT_FAILURE);
         }
+    }
+
+    std::string ConfigFile::getMCLauncherPath() {
+        return MCLauncher_path;
+    }
+
+    bool ConfigFile::getFolderWasGenerated() {
+        return folderWasGenerated;
     }
 
     //creates a new file if the user doesn't have one.
@@ -45,7 +54,7 @@ namespace MCHelper {
         }
         catch (const std::exception& e) {
             std::cerr << "Failed to create the file.\n";
-            std::cout << e.what();
+            std::cerr << e.what();
             std::exit(EXIT_FAILURE);
         }
 	}
@@ -53,7 +62,11 @@ namespace MCHelper {
     void ConfigFile::loadDefaultConfig(std::ofstream& file) {
         nlohmann::json data; //the main JSON object.
 
+        //comments for the user, because JSON does not officially supports comments.
+        data["comments"] = "File generated automatically, do NOT change anything unless you know what you are doing.";
+
         nlohmann::json config; //the config JSON object.
+        config["MCLauncherPath"] = "C:/Program Files (x86)/Minecraft Launcher/MinecraftLauncher.exe";
         config["folderWasGenerated"] = false;
         data["config"] = config;
 
