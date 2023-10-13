@@ -23,9 +23,9 @@ int main() {
 	}
 
 	//user input, add and get profiles, open minecraft.
-	launcher.addProfile(config_file, "hi", "1.20.1");
-	launcher.addProfile(config_file, "test", "1.20");
-	launcher.addProfile(config_file, "a", "1.19");
-	launcher.addProfile(config_file, "b", "1.18");
+	config_file.addProfile("hi", "1.20.1");
+	config_file.addProfile("test", "1.20");
+	config_file.addProfile("a", "1.19");
+	config_file.addProfile("b", "1.18");
 	return 0;
 }

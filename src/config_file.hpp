@@ -22,6 +22,7 @@ namespace MCHelper {
 		void openAndLoadFile(const std::string& file_name);
 		std::string getMCLauncherPath();
 		bool getConfigWasGenerated();
+		void addProfile(const std::string& profile_name, const std::string& profile_version);
 
 		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const bool& new_value);
 		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const int& new_value);

@@ -110,6 +110,22 @@ namespace MCHelper {
 	//END OF EDIT.
 	//END OF EDIT.
 
+	void ConfigFile::addProfile(const std::string& profile_name, const std::string& profile_version) {
+		nlohmann::json profile{
+		{"created", "1970-01-02T00:00:00.000Z"},
+		{"icon", "Furnace"},
+		{"lastUsed", "1970-01-02T00:00:00.000Z"},
+		{"lastVersionId", profile_version},
+		{"name", profile_name},
+		{"type", "custom"}
+		};
+
+		nlohmann::json profiles;
+		profiles[profile_name] = profile;
+
+		addConfigFile(".config_file.json", "profiles", "", profiles);
+	}
+
 	std::string ConfigFile::getMCLauncherPath() {
 		return MCLauncher_path;
 	}
