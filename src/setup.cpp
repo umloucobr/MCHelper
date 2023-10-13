@@ -6,11 +6,13 @@ namespace MCHelper {
 		/*Here the setup is being made.
 		1-Launcher is copied in the folder.
 		2-Launcher is executed, so .minecraft is generated
+		3-"profiles" folder is created.
 		*/
 		this->MCLauncher_path = MCLauncher_path;
 		copyLauncher();
 		std::cout << "WARNING: CLOSE THE LAUNCHER AFTER IT OPENS.\n";
 		Launcher::executeLauncher();
+		createProfilesFolder();
 	}
 
 	void Setup::copyLauncher() {
@@ -33,6 +35,13 @@ namespace MCHelper {
 			std::cerr << "Failed setup part.\n";
 			std::cout << e.what();
 			std::exit(EXIT_FAILURE);
+		}
+	}
+
+	void Setup::createProfilesFolder() {
+		if (!std::filesystem::exists("profiles")) {
+			std::filesystem::create_directory("profiles");
+			std::cout << "\"profiles\" folder was created";
 		}
 	}
 }

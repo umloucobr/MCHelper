@@ -26,6 +26,7 @@ namespace MCHelper {
 	bool.
 	int.
 	std::string.
+	nlohmann::json. this one adds.
 	*/
 	void ConfigFile::editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const bool& new_value) {
 		//get and load the file.
@@ -60,6 +61,7 @@ namespace MCHelper {
 			tempJsonData[key_to_edit][key_to_edit2] = new_value;
 		}
 
+		fstream_file.seekp(0);
 		fstream_file << tempJsonData.dump(4);
 	}
 
@@ -71,14 +73,38 @@ namespace MCHelper {
 		fstream_file >> tempJsonData;
 
 		if (key_to_edit2 == "") {
-			tempJsonData[key_to_edit] = new_value;
+			tempJsonData[key_to_edit].emplace_back(new_value);
 		}
 		else {
 			tempJsonData[key_to_edit][key_to_edit2] = new_value;
 		}
 
+		fstream_file.seekp(0);
 		fstream_file << tempJsonData.dump(4);
 	}
+
+	//nlohmann::json.
+	void ConfigFile::addConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const nlohmann::json& new_value) {
+		std::fstream fstream_file {fstreamFile(file_name)};
+		nlohmann::json tempJsonData;
+
+		fstream_file >> tempJsonData;
+
+		if (key_to_edit2 == "") {
+			for (const auto& [key, value] : new_value.items()) { //if you use emplace_back() it gives square brackets in the "profiles"
+				tempJsonData[key_to_edit][key] = value;			 //JSON object.
+			}
+		}
+		else {
+			for (const auto& [key, value] : new_value.items()) {
+				tempJsonData[key_to_edit][key_to_edit2][key] = value;
+			}
+		}
+
+		fstream_file.seekp(0);
+		fstream_file << tempJsonData.dump(4);
+	}
+
 	//END OF EDIT.
 	//END OF EDIT.
 	//END OF EDIT.

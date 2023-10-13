@@ -26,5 +26,6 @@ namespace MCHelper {
 		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const bool& new_value);
 		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const int& new_value);
 		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const std::string& new_value);
+		void addConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const nlohmann::json& new_value);
 	};
 }
