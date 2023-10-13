@@ -10,14 +10,21 @@ namespace MCHelper {
 	private:
 		nlohmann::json jsonData;
 		std::string MCLauncher_path{};
-		bool folderWasGenerated{};
+		bool configWasGenerated{};
 
+		std::ifstream ifstreamFile(const std::string& file_name);
+		std::ofstream ofstreamFile(const std::string& file_name);
+		std::fstream fstreamFile(const std::string& file_name);
 		void createFile(const std::string& file_name);
 		void loadDefaultConfig(std::ofstream& file);
 	public:
 		ConfigFile();
-		void openFile(const std::string& file_name);
+		void openAndLoadFile(const std::string& file_name);
 		std::string getMCLauncherPath();
-		bool getFolderWasGenerated();
+		bool getConfigWasGenerated();
+
+		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const bool& new_value);
+		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const int& new_value);
+		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const std::string& new_value);
 	};
 }

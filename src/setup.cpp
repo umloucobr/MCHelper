@@ -3,8 +3,13 @@
 
 namespace MCHelper {
 	Setup::Setup(std::string MCLauncher_path) {
+		/*Here the setup is being made.
+		1-Launcher is copied in the folder.
+		2-Launcher is executed, so .minecraft is generated
+		*/
 		this->MCLauncher_path = MCLauncher_path;
 		copyLauncher();
+		std::cout << "WARNING: CLOSE THE LAUNCHER AFTER IT OPENS.\n";
 		Launcher::executeLauncher();
 	}
 
