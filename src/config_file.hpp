@@ -8,7 +8,6 @@
 namespace MCHelper {
 	class ConfigFile {
 	private:
-		nlohmann::json jsonData;
 		std::string MCLauncher_path{};
 		bool configWasGenerated{};
 
@@ -20,13 +19,19 @@ namespace MCHelper {
 	public:
 		ConfigFile();
 		void openAndLoadFile(const std::string& file_name);
+
 		std::string getMCLauncherPath();
 		bool getConfigWasGenerated();
-		void addProfile(const std::string& profile_name, const std::string& profile_version);
+		nlohmann::json getJsonObject(const std::string& json_object);
+		nlohmann::json getJsonObject(const std::string& json_object, const std::string& json_object2);
+		nlohmann::json getJsonObject(const std::string& json_object, const std::string& json_object2, const std::string& json_object3);
 
 		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const bool& new_value);
 		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const int& new_value);
 		void editConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const std::string& new_value);
-		void addConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const nlohmann::json& new_value);
+		void addToConfigFile(const std::string& file_name, const std::string& key_to_edit, const std::string& key_to_edit2, const nlohmann::json& new_value);
+
+		void addProfile(const std::string& profile_name, const std::string& profile_version);
+		void removeProfile(const std::string& profile_name);
 	};
 }

@@ -27,5 +27,7 @@ int main() {
 	config_file.addProfile("test", "1.20");
 	config_file.addProfile("a", "1.19");
 	config_file.addProfile("b", "1.18");
+	std::cout << std::setw(4) << config_file.getJsonObject("profiles");
+	config_file.removeProfile("test");
 	return 0;
 }
